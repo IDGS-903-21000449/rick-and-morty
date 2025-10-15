@@ -36,7 +36,6 @@ function Characters({ characters, setCharacters }) {
         ))}
       </div>
 
-      {/* Si quieres mantener este botón para volver al inicio */}
       <span className="back-home" onClick={setCharacters}>
         Back Home
       </span>
