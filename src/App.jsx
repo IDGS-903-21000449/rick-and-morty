@@ -4,14 +4,13 @@ import "./App.css";
 import Characters from "./components/Characters";
 
 const App = () => {
-  const [characters, setCharacters] = useState(null);   // null = pantalla inicial
+  const [characters, setCharacters] = useState(null);   
   const [page, setPage] = useState(1);
   const [totalPages, setTotalPages] = useState(0);
   const [query, setQuery] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
 
-  // Trae personajes con soporte de página y nombre (búsqueda)
   const fetchCharacters = async (nextPage = page, nextQuery = query) => {
     setLoading(true);
     setError(null);
@@ -25,10 +24,9 @@ const App = () => {
         `https://rickandmortyapi.com/api/character/?${params.toString()}`
       );
 
-      // La API regresa 404 cuando no hay resultados
       if (!res.ok) {
         if (res.status === 404) {
-          setCharacters([]);        // sin resultados
+          setCharacters([]);      
           setTotalPages(0);
           setPage(1);
           setLoading(false);
@@ -48,16 +46,13 @@ const App = () => {
     }
   };
 
-  // Botón de la pantalla inicial
   const start = () => fetchCharacters(1, "");
 
-  // Enviar el formulario de búsqueda
   const onSearchSubmit = (e) => {
     e.preventDefault();
-    fetchCharacters(1, query); // siempre vuelve a la página 1 al buscar
+    fetchCharacters(1, query); 
   };
 
-  // Navegación
   const prevPage = () => page > 1 && fetchCharacters(page - 1, query);
   const nextPage = () => page < totalPages && fetchCharacters(page + 1, query);
 
